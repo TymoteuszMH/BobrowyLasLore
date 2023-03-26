@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit{
   }
 
   GetUsers(){
-    this.service.getAllUsernames().subscribe(data=>{
+    this.service.getUser().subscribe(data=>{
       this.users = data;
     })
   }
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit{
       this.err_mes="There can't be any spacies in password!";
       return false;
     }
-    else if (val.Password.length < 8){
+    else if (val.Password.length < 8 && !signin){
       this.err_mes="Password can't be shorter than 8 characters!";
       return false;
     }

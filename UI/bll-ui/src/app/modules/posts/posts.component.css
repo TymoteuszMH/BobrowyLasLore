@@ -1,0 +1,14 @@
+.post-cards{
+    text-decoration:none; 
+    width: 30rem;
+    transition: 0.5s;
+}
+.post-cards:hover{
+    filter: brightness(85%);
+}
+.header{
+    color: red;
+}
+.body{
+    color: black;
+}

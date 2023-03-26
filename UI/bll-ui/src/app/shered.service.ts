@@ -36,6 +36,10 @@ export class SheredService {
     return this.http.get<any[]>(this.APIUrl + '/posts/')
   }
 
+  getPost(id:any):Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/posts/' + id)
+  }
+
   addPosts(val:any){
     return this.http.post(this.APIUrl + '/posts/', val)
   }
@@ -50,9 +54,6 @@ export class SheredService {
 
   UploadPhoto(val:any){
     return this.http.post(this.APIUrl + '/SaveFile/', val)
-  }
-  getAllUsernames():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/users/')
   }
 
 }

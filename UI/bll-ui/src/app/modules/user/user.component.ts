@@ -25,7 +25,7 @@ export class UserComponent implements OnInit{
   }
 
   GetUsers(){
-    this.service.getAllUsernames().subscribe(data=>{
+    this.service.getUser().subscribe(data=>{
       this.users = data;
     })
   }

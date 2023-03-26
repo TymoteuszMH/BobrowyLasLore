@@ -1,0 +1,13 @@
+<div class="container">
+    <div *ngFor="let data of articlesList">
+        <a (click)="goToDetails(data.PostId)" class="card mx-auto post-cards">
+            <div class="card-header">
+                <h3 class="card-title">{{data.PostTitle}}</h3><hr>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">{{data.Author.Username}}</h5><br>
+                <h6 class="card-text">{{data.CreationDate}}</h6>
+            </div>
+        </a><br>
+    </div>
+</div>

@@ -1,1 +1,23 @@
-<p>addpost works!</p>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ModalTitle}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-fruop row">
+          <div class="alert alert-danger" *ngIf="err">{{err_mes}}</div>
+          <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="posttitle" class="form-control"/>
+          <label class="col-form-label">Photo:</label><input type="file" [(ngModel)]="postphoto" (change)="uploadPhoto($event)" class="form-control"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

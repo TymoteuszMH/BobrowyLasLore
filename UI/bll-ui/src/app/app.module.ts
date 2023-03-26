@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/login/login.component';
 import { PostsComponent } from './modules/posts/posts.component';
-import { ArticulesComponent } from './modules/posts/articules/articules.component';
+import { ArticlesComponent } from './modules/posts/articles/articles.component';
 import { StoriesComponent } from './modules/posts/stories/stories.component';
 import { CharactersComponent } from './modules/posts/characters/characters.component';
 import { UserComponent } from './modules/user/user.component';
@@ -23,7 +23,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component'
     AppComponent,
     LoginComponent,
     PostsComponent,
-    ArticulesComponent,
+    ArticlesComponent,
     StoriesComponent,
     CharactersComponent,
     UserComponent,
