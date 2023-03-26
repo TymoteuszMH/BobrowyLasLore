@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card mx-auto login">
+        <div class="card-body mx-auto">
+            <div class="card-title">
+                <h1>Welcome!</h1>
+            </div>
+            <div class="form-fruop row">
+                <div class="alert alert-success" *ngIf="acc_created">Account created successfully!</div>
+                <div class="alert alert-danger" *ngIf="err">{{err_mes}}</div>
+                <label class="col-form-label">Username:</label><input type="text" [(ngModel)]="username" class="form-control"/>
+                <label class="col-form-label">Password:</label><input type="password" [(ngModel)]="password" class="form-control"/>
+                <a (click)="ChangeForm()" class="sign_link btn-link">{{form}}</a>
+                <button (click)="SignUp()" *ngIf="signup" class="btn btn-primary">Sign up</button>
+                <button (click)="SignIn()" *ngIf="!signup" class="btn btn-primary">Sign in</button>
+            </div>
+        </div>
+    </div>
+</div>
