@@ -13,6 +13,7 @@ class TypesSerializer(serializers.ModelSerializer):
 
 class PostsSerializer(serializers.ModelSerializer):
     User = UsersSerializer(many=False, read_only=True)
+    Type = TypesSerializer(many=False, read_only=True)
     class Meta:
         model = Posts
         fields = '__all__'

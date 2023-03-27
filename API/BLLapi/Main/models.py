@@ -13,7 +13,7 @@ class Types(models.Model):
 
 class Posts(models.Model):
     PostId = models.AutoField(primary_key=True, null=False, unique=True)
-    Types = models.ForeignKey(Types, on_delete=models.CASCADE)
+    Type = models.ForeignKey(Types, on_delete=models.CASCADE, default=1)
     User = models.ForeignKey(Users, on_delete=models.CASCADE)
     CreationDate = models.DateField(_("Date"), default=datetime.date.today, null=False)
     PostTitle = models.CharField(max_length=100, unique=True, null=False)
