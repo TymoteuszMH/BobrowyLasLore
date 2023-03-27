@@ -10,13 +10,15 @@
       <div class="modal-body">
         <div class="form-fruop row">
           <div class="alert alert-danger" *ngIf="err">{{err_mes}}</div>
-          <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="posttitle" class="form-control"/>
-          <label class="col-form-label">Photo:</label><input type="file" [(ngModel)]="postphoto" (change)="uploadPhoto($event)" class="form-control"/>
+          <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="PostTitle" class="form-control"/>
+          <label class="col-form-label">Photo:</label><input type="file" (change)="uploadPhoto($event)" class="form-control"/>
+          <label class="col-form-label">Content:</label><textarea [(ngModel)]="PostContent" class="form-control"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="">Save changes</button>
+        <button type="button" *ngIf="!edit" class="btn btn-primary" (click)="addPost()">Save changes</button>
+        <button type="button" *ngIf="edit" class="btn btn-primary" (click)="editPost()">Save changes</button>
       </div>
     </div>
   </div>

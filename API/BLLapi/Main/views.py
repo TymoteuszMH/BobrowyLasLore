@@ -73,7 +73,7 @@ def postsApi(request, id=0):
         if posts_serializer.is_valid():
             posts_serializer.save()
             return JsonResponse("Posts added successfully!", safe=False)
-        return JsonResponse("Failed to add post", safe=False)
+        return JsonResponse("Failed to add post" , safe=False)
     elif request.method=='PUT':
         posts_data = JSONParser().parse(request)
         posts = Posts.objects.get(PostId = posts_data['PostId'])

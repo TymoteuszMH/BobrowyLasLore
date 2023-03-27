@@ -13,9 +13,9 @@ class Types(models.Model):
 
 class Posts(models.Model):
     PostId = models.AutoField(primary_key=True, null=False, unique=True)
-    Type = models.ForeignKey(Types, on_delete=models.CASCADE)
-    Author = models.ForeignKey(Users, on_delete=models.CASCADE)
-    CreationDate = models.DateField(_("Date"), default=datetime.date.today)
-    PostTitle = models.CharField(max_length=100, unique=True)
-    PostPhoto = models.CharField(max_length=100, default=0)
-    PostContent = models.TextField
+    Types = models.ForeignKey(Types, on_delete=models.CASCADE)
+    User = models.ForeignKey(Users, on_delete=models.CASCADE)
+    CreationDate = models.DateField(_("Date"), default=datetime.date.today, null=False)
+    PostTitle = models.CharField(max_length=100, unique=True, null=False)
+    PostPhoto = models.CharField(max_length=100, default=0, null=False)
+    PostContent = models.TextField()
