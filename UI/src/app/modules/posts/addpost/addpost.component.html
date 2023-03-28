@@ -1,25 +1,21 @@
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">{{ModalTitle}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{modalTitle}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="form-fruop row">
-          <div class="alert alert-danger" *ngIf="err">{{err_mes}}</div>
-          <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="PostTitle" class="form-control"/>
+          <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
+          <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="postTitle" class="form-control"/>
           <label class="col-form-label">Photo:</label><input type="file" (change)="uploadPhoto($event)" class="form-control"/>
-          <label class="col-form-label">Content:</label><textarea [(ngModel)]="PostContent" class="form-control"></textarea>
+          <label class="col-form-label">Content:</label><textarea [(ngModel)]="postContent" class="form-control"></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" *ngIf="!edit" class="btn btn-primary" (click)="addPost()">Save changes</button>
         <button type="button" *ngIf="edit" class="btn btn-primary" (click)="editPost()">Save changes</button>
       </div>
     </div>
   </div>
-</div>

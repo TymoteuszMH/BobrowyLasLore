@@ -1,31 +1,36 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoginData, SheredService } from 'src/app/shered.service';
+import { LoginData, SheredService } from '../../helpers/shered.service';
 
 @Component({
   selector: 'app-postdetails',
   templateUrl: './postdetails.component.html',
   styleUrls: ['./postdetails.component.css']
 })
+
 export class PostdetailsComponent {
   postId: any;
-  UserId: any;
+  UserId: any = this.logindata.userId;
   postData: any = [];
+  exist: boolean = false;
 
+  
+  
   constructor(
-    private service: SheredService,
     private logindata: LoginData,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private service: SheredService,
   ){}
 
   ngOnInit(){
     const tempID = this.route.snapshot.paramMap.get("id");
-    this.postId = tempID;
-    this.UserId = this.logindata.userId
+    this.GetPost(tempID);
   }
-  getPost(id:any){
+
+
+  GetPost(id:any){
     this.service.getPost(id).subscribe(data=>{
-      this.postData = data
-    });
+      this.postData = data;
+    })
   }
 }

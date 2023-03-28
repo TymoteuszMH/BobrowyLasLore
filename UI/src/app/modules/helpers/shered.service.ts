@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class SheredService {
 
   constructor(private http:HttpClient) { }
 
-  getUser():Observable<any[]>{
+  getUsers():Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + '/users/')
   }
 
@@ -36,7 +36,7 @@ export class SheredService {
     return this.http.get<any[]>(this.APIUrl + '/posts/')
   }
 
-  getPost(id:any):Observable<any[]>{
+  getPost(id:number):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + '/posts/' + id)
   }
 

@@ -1,4 +1,5 @@
 <div class="container">
+    <button (click)="addArticule()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Add Articule</button>
     <div *ngFor="let data of articlesList">
         <a (click)="goToDetails(data.PostId)" class="card mx-auto post-cards">
             <div class="card-header">
@@ -10,4 +11,5 @@
             </div>
         </a><br>
     </div>
+    <app-addpost *ngIf="show" id="add" (addeditpost) = "close($event)" [posts]="articlesList" [type]='1' [data] = "data" [modalTitle] = "modalTitle"></app-addpost>
 </div>

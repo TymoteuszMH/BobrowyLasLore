@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { login } from 'src/app/app-routing.module';
-import { LoginData } from 'src/app/shered.service';
+import { LoginData } from '../helpers/shered.service';
 
 @Component({
   selector: 'app-navbar',

@@ -12,11 +12,13 @@ import { UserComponent } from './modules/user/user.component';
 import { AddpostComponent } from './modules/posts/addpost/addpost.component';
 import { PostdetailsComponent } from './modules/posts/postdetails/postdetails.component';
 import { DeletepostComponent } from './modules/posts/deletepost/deletepost.component';
-import { LoginData, SheredService } from './shered.service';
 
 import {HttpClientModule} from '@angular/common/http'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavbarComponent } from './modules/navbar/navbar.component'
+import { ValidationService } from './modules/helpers/validation.service';
+import { CheckService } from './modules/helpers/check.service';
+import { SheredService, LoginData } from './modules/helpers/shered.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component'
     AddpostComponent,
     PostdetailsComponent,
     DeletepostComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SheredService, LoginData],
+  providers: [SheredService, LoginData, ValidationService, CheckService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,18 +1,18 @@
-from django.urls import re_path
+from django.urls import path
 from Main import views
 
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    re_path('users/', views.usersApi),
-    re_path('users/([0-9]+)', views.usersApi),
+    path('users/', views.usersApi),
+    path('users/<int:id>', views.usersApi),
 
-    re_path('types/', views.typesApi),
-    re_path('types/([0-9]+)', views.typesApi),
+    path('types/', views.typesApi),
+    path('types/<int:id>', views.typesApi),
 
-    re_path('posts/', views.postsApi),
-    re_path('posts/([0-9]+)', views.postsApi),
-
-    re_path('saveFiles', views.saveFile),
+    path('posts/', views.postsApi),
+    path('posts/<int:id>', views.postsApi),
+    
+    path('saveFiles', views.saveFile),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

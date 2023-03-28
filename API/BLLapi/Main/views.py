@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from Main.models import Users, Types, Posts
 from Main.serializers import UsersSerializer, TypesSerializer, PostsSerializer
@@ -63,7 +64,14 @@ def typesApi(request, id=0):
 
 @csrf_exempt
 def postsApi(request, id=0):
-    if request.method=='GET':
+    if request.method=='GET' and id>0:
+        try:
+            post = Posts.objects.get(PostId = id)
+            posts_serializer = PostsSerializer(post, many=False)
+            return JsonResponse(posts_serializer.data, safe=False)
+        except ObjectDoesNotExist:
+            return JsonResponse("error", safe=False)
+    elif request.method=='GET':
         posts = Posts.objects.all()
         posts_serializer = PostsSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginData, SheredService } from 'src/app/shered.service';
+import { LoginData, SheredService } from '../helpers/shered.service';
+import { ValidationService } from '../helpers/validation.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit{
+export class UserComponent{
   
   constructor(
     private service: SheredService,
-    private logindata: LoginData
+    private logindata: LoginData,
+    protected validation: ValidationService
   ){}
 
   userID = this.logindata.userId;
@@ -21,20 +23,20 @@ export class UserComponent implements OnInit{
   users:any=[];
 
   ngOnInit(){
-    this.GetUsers();
+    this.getUsers();
   }
 
-  GetUsers(){
-    this.service.getUser().subscribe(data=>{
+  getUsers(){
+    this.service.getUsers().subscribe(data=>{
       this.users = data;
-    })
+    }) 
   }
-
+  
   ChangeUserdata(){
     var val = { UserId: this.userID,
                 Username: this.username,
                 Password: this.password}
-    var validate = this.Validate(val);
+    var validate = this.validation.ValidateUser(val, false, this.users);
     if(validate){
       localStorage.setItem('username', val.Username);
       localStorage.setItem('password', val.Password);
@@ -43,35 +45,5 @@ export class UserComponent implements OnInit{
     }else{
       this.err=true;
     }
-  }
-
-  UsernameCheck(val:any){
-    var check = true;
-    this.users.forEach((element: any) => {
-      if(val.Username == element.Username){
-        check = false;
-      }
-    });
-    return check;
-  }
-
-  Validate(val: any){
-    if(val.Username=="" || val.Password==""){
-      this.err_mes="Fill in the fields!";
-      return false;
-    }
-    else if(val.Username.indexOf(' ') > 0){
-      this.err_mes="There can't be any spacies in username!";
-      return false;
-    }
-    else if (val.Password.indexOf(' ') > 0){
-      this.err_mes="There can't be any spacies in password!";
-      return false;
-    }
-    else if (val.Password.length < 8){
-      this.err_mes="Password can't be shorter than 8 characters!";
-      return false;
-    }
-    return this.UsernameCheck(val)
   }
 }

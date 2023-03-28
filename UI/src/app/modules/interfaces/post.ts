@@ -1,7 +1,7 @@
 import { ITypes } from "./type";
 import { IUser } from "./user";
 export interface IPost{
-    PostId: any,
+    PostId: number,
     Type: ITypes,
     User: IUser,
     CreationDate: string | Date,

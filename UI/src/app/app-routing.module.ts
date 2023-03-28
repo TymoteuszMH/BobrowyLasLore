@@ -18,7 +18,7 @@ export const site: Routes = [
   {path:'articles', component:ArticlesComponent},
   {path:'characters', component:CharactersComponent},
   {path:'stories', component:StoriesComponent},
-  {path:'details', component:PostdetailsComponent},
+  {path:'details/:id', component:PostdetailsComponent},
   {path: '**', redirectTo: ''}
 ];
 

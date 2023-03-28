@@ -8,6 +8,7 @@ import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 export class AppComponent implements DoCheck, OnInit{
   title = 'bll-ui';
   islogged: any = true;
+
   // language: any
   ngOnInit(){
     // localStorage.setItem('language', 'eng');
