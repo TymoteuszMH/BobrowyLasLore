@@ -1,16 +1,19 @@
-<div class="container" *ngIf="postData != 'error'">
-    <div *ngIf="postData.User.UserId==UserId">
-        <button class="btn btn-primary">Edit</button>
+<div class="container" *ngIf="loaded | async">
+    <div class="container" *ngIf="postData != 'error'">
+        <div *ngIf="postData.User.UserId==userId">
+            <button class="btn btn-primary" (click)="openAddModal(postData)">Edit</button>
+            <button (click)="deleteArticule(postData.PostId)" class="btn btn-primary" data-bs-toggle="modal">Delete Articule</button>
+        </div>
+        <img [src]=postData.PostPhoto width="200px" height="220px"/>
+        <h1>{{postData.PostTitle}}</h1><hr> 
+        <h3>Author: {{postData.User.Username}}</h3><br>
+        <h4>Date: {{postData.CreationDate}}</h4><br>
+        <h6>Type: {{postData.Type.Type}}</h6><hr>
+        <div class="container">
+            {{postData.PostContent}}
+        </div>
     </div>
-    <img [src]=postData.PostPhoto width="200px" height="450px"/>
-    <h1>{{postData.PostTitle}}</h1><hr> 
-    <h3>Author: {{postData.User.Username}}</h3><br>
-    <h4>Date: {{postData.CreationDate}}</h4><br>
-    <h6>Type: {{postData.Type.Type}}</h6><hr>
-    <div class="container">
-        {{postData.PostContent}}
+    <div class="container" *ngIf="postData == 'error'">
+        <h1>Post doesn't exist! </h1>
     </div>
-</div>
-<div class="container" *ngIf="postData == 'error'">
-    <h1>Post doesn't exist! </h1>
 </div>

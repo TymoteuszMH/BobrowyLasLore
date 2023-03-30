@@ -35,9 +35,13 @@ export class SheredService {
   getPosts():Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + '/posts/')
   }
+  
+  getPostbyType(type:number):Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/posts/' +  type)
+  }
 
   getPost(id:number):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/posts/' + id)
+    return this.http.get<any[]>(this.APIUrl + '/post/' + id)
   }
 
   addPosts(val:any){
@@ -48,12 +52,12 @@ export class SheredService {
     return this.http.put(this.APIUrl + '/posts/', val)
   }
 
-  deletePostList(val:any){
-    return this.http.put(this.APIUrl + '/posts/', val)
+  deletePost(id:any){
+    return this.http.delete(this.APIUrl + '/post/' + id)
   }
 
   UploadPhoto(val:any){
-    return this.http.post(this.APIUrl + '/SaveFile/', val)
+    return this.http.post(this.APIUrl + '/saveFiles/', val)
   }
 
 }

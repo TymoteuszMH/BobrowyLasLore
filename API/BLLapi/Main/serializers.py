@@ -12,8 +12,13 @@ class TypesSerializer(serializers.ModelSerializer):
         fields = ['TypeId','Type']
 
 class PostsSerializer(serializers.ModelSerializer):
-    User = UsersSerializer(many=False, read_only=True)
-    Type = TypesSerializer(many=False, read_only=True)
+    User = UsersSerializer(many=False)
+    Type = TypesSerializer(many=False)
+    class Meta:
+        model = Posts
+        fields = '__all__'
+
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
         fields = '__all__'

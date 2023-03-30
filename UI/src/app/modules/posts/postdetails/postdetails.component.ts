@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginData, SheredService } from '../../helpers/shered.service';
+import { IPost } from '../../interfaces/post';
+import { AddpostComponent } from '../addpost/addpost.component';
+import { DeletepostComponent } from '../deletepost/deletepost.component';
 
 @Component({
   selector: 'app-postdetails',
@@ -9,10 +13,13 @@ import { LoginData, SheredService } from '../../helpers/shered.service';
 })
 
 export class PostdetailsComponent {
+  loaded: Promise<boolean> = Promise.resolve(false);
   postId: any;
-  UserId: any = this.logindata.userId;
+  userId: any = this.logindata.userId;
   postData: any = [];
+  postsList: IPost[] = []
   exist: boolean = false;
+  modalTitle: string ="";
 
   
   
@@ -20,17 +27,60 @@ export class PostdetailsComponent {
     private logindata: LoginData,
     private route: ActivatedRoute,
     private service: SheredService,
+    private modalService: NgbModal,
+    private router: Router
   ){}
 
   ngOnInit(){
     const tempID = this.route.snapshot.paramMap.get("id");
     this.GetPost(tempID);
+    this.getPosts();
+  }
+
+  openAddModal(data:any) {
+    const modalRef = this.modalService.open(AddpostComponent,
+      {
+        backdrop: true,
+        scrollable: false,
+        centered: true,
+      });
+      this.modalTitle = "Edit Post";
+
+    modalRef.componentInstance.data = data;
+    modalRef.componentInstance.modalTitle = this.modalTitle;
+    modalRef.componentInstance.posts = this.postsList;
+    modalRef.componentInstance.type = 2;
+    modalRef.componentInstance.edit = true;
+    
+    modalRef.result.then(()=>{this.GetPost(data.PostId);});
+  }
+  
+  deleteArticule(id:any){
+    const modalRef = this.modalService.open(DeletepostComponent,
+      {
+        scrollable: false,
+        centered: true,
+        keyboard: false,
+      });
+    modalRef.componentInstance.id = id;
+  modalRef.result.then(()=>{this.router.navigate([ '/'+this.postData.Type.Type ]);});
   }
 
 
   GetPost(id:any){
     this.service.getPost(id).subscribe(data=>{
       this.postData = data;
+      this.loaded = Promise.resolve(true);
     })
   }
+  getPosts(){
+    this.service.getPosts().subscribe(data=>{
+      data.forEach((element: any, index:any) => {
+        if(element.Type.TypeId != this.postData.Type.TypeId)
+          data.splice(index, 1)
+      });
+      this.postsList = data
+    })
+  }
+  
 }

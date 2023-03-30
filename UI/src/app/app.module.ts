@@ -19,6 +19,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component'
 import { ValidationService } from './modules/helpers/validation.service';
 import { CheckService } from './modules/helpers/check.service';
 import { SheredService, LoginData } from './modules/helpers/shered.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SheredService, LoginData } from './modules/helpers/shered.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [SheredService, LoginData, ValidationService, CheckService],
   bootstrap: [AppComponent]

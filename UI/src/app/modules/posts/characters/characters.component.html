@@ -1,1 +1,26 @@
-<p>characters works!</p>
+<div class="container">
+    <button (click)="openAddModal(false)" class="add    btn btn-primary" data-bs-toggle="modal">Add Character</button><hr>
+    <div *ngFor="let data of charactersList">
+        <div class="card mx-auto post-cards">
+                <div class="card-header">
+                    <h3 class="card-title">{{data.PostTitle}}
+                    <div class="btn-group dropstart float-end" *ngIf="data.User.UserId == logindata.userId">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button (click)="openAddModal(true, data)" class="dropdown-item" data-bs-toggle="modal">Edit Character</button></li>
+                            <li><button (click)="deleteCharacter(data.PostId)" class="dropdown-item" data-bs-toggle="modal">Delete Character</button></li>
+                        </ul>
+                    </div></h3><hr>
+                </div>
+                <a (click)="goToDetails(data.PostId)" class="btn">
+                <div class="card-body float-start">
+                    <h5 class="card-text float-start">{{data.User.Username}}</h5><br>
+                    <h6 class="card-text float-start">{{data.CreationDate}}</h6>
+                </div>
+                </a>
+        </div>
+        <br>
+    </div>
+</div>

@@ -1,15 +1,26 @@
 <div class="container">
-    <button (click)="addArticule()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Add Articule</button>
+    <button (click)="openAddModal(false)" class="add    btn btn-primary" data-bs-toggle="modal">Add Articule</button><hr>
     <div *ngFor="let data of articlesList">
-        <a (click)="goToDetails(data.PostId)" class="card mx-auto post-cards">
-            <div class="card-header">
-                <h3 class="card-title">{{data.PostTitle}}</h3><hr>
-            </div>
-            <div class="card-body">
-                <h5 class="card-text">{{data.User.Username}}</h5><br>
-                <h6 class="card-text">{{data.CreationDate}}</h6>
-            </div>
-        </a><br>
+        <div class="card mx-auto post-cards">
+                <div class="card-header">
+                    <h3 class="card-title">{{data.PostTitle}}
+                    <div class="btn-group dropstart float-end" *ngIf="data.User.UserId == logindata.userId">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button (click)="openAddModal(true, data)" class="dropdown-item" data-bs-toggle="modal">Edit Articule</button></li>
+                            <li><button (click)="deleteArticule(data.PostId)" class="dropdown-item" data-bs-toggle="modal">Delete Articule</button></li>
+                        </ul>
+                    </div></h3><hr>
+                </div>
+                <a (click)="goToDetails(data.PostId)" class="btn">
+                <div class="card-body float-start">
+                    <h5 class="card-text float-start">{{data.User.Username}}</h5><br>
+                    <h6 class="card-text float-start">{{data.CreationDate}}</h6>
+                </div>
+                </a>
+        </div>
+        <br>
     </div>
-    <app-addpost *ngIf="show" id="add" (addeditpost) = "close($event)" [posts]="articlesList" [type]='1' [data] = "data" [modalTitle] = "modalTitle"></app-addpost>
 </div>

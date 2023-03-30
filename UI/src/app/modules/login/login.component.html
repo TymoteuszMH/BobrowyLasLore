@@ -9,7 +9,7 @@
                 <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
                 <label class="col-form-label">Username:</label><input type="text" [(ngModel)]="username" class="form-control"/>
                 <label class="col-form-label">Password:</label><input type="password" [(ngModel)]="password" class="form-control"/>
-                <a (click)="ChangeForm()" class="sign_link btn-link">{{form}}</a>
+                <a (click)="ChangeForm()" class="btn-link">{{form}}</a>
                 <button (click)="SignUp()" *ngIf="signup" class="btn btn-primary">Sign up</button>
                 <button (click)="SignIn()" *ngIf="!signup" class="btn btn-primary">Sign in</button>
             </div>

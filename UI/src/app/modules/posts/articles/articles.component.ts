@@ -1,7 +1,10 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginData, SheredService } from '../../helpers/shered.service';
 import { IPost } from '../../interfaces/post';
+import { AddpostComponent } from '../addpost/addpost.component';
+import { DeletepostComponent } from '../deletepost/deletepost.component';
 
 @Component({
   selector: 'app-articles',
@@ -10,42 +13,69 @@ import { IPost } from '../../interfaces/post';
 })
 export class ArticlesComponent {
   articlesList:IPost[] = [];
-  show = false;
+  author = false;
   data:any;
   modalTitle = "";
 
   constructor(
     private service: SheredService,
-    private logindata: LoginData,
+    protected logindata: LoginData,
     private router: Router,
+    private modalService: NgbModal,
   ){}
 
   ngOnInit(){
     this.getArticlesList();
   }
 
-  addArticule(){
-    this.data = {PostTitle: "",
-                  PostPhotoName: "",
+  openAddModal(edit:boolean, data:any = {}) {
+    const modalRef = this.modalService.open(AddpostComponent,
+      {
+        backdrop: true,
+        scrollable: false,
+        centered: true,
+      });
+    if(edit){
+      this.modalTitle = "Edit Article";
+      this.data = {PostId: data.PostId,
+                  PostTitle: data.PostTitle,
+                  PostPhotoPath: data.PostPhotoPath,
+                  PostContent: data.PostContent
+                  }
+    }else{
+      this.modalTitle = "Add Article";
+      this.data = {PostTitle: "",
                   PostPhotoPath: "",
                   PostContent: ""
                 }
-    this.modalTitle = "Add Articule";
-    this.show = true;
-  }
+      
+    }
 
-  close(close: boolean){
-    this.show = close;
+
+    modalRef.componentInstance.data = this.data;
+    modalRef.componentInstance.modalTitle = this.modalTitle;
+    modalRef.componentInstance.posts = this.articlesList;
+    modalRef.componentInstance.type = 2;
+    modalRef.componentInstance.edit = edit;
+    
+    modalRef.result.then(()=>{this.getArticlesList();});
   }
 
   getArticlesList(){
-    this.service.getPosts().subscribe(data=>{
-      this.articlesList = data;
-    })
-    this.articlesList.forEach((element: any, index:any) => {
-      if(element.Type.TypeId != '1')
-        this.articlesList.splice(index, 1)
+    this.service.getPostbyType(2).subscribe(data=>{
+      this.articlesList = data
     });
+  }
+
+  deleteArticule(id:any){
+    const modalRef = this.modalService.open(DeletepostComponent,
+      {
+        scrollable: false,
+        centered: true,
+        keyboard: false,
+      });
+    modalRef.componentInstance.id = id;
+  modalRef.result.then(()=>{this.getArticlesList();});
   }
 
   goToDetails(id:any){

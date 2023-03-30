@@ -12,7 +12,8 @@ urlpatterns = [
     path('types/<int:id>', views.typesApi),
 
     path('posts/', views.postsApi),
-    path('posts/<int:id>', views.postsApi),
+    path('post/<int:id>', views.postApi),
+    path('posts/<int:type>', views.postsApi),
     
-    path('saveFiles', views.saveFile),
+    path('saveFiles/', views.saveFile),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

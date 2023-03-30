@@ -5,7 +5,7 @@ from django.http.response import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from Main.models import Users, Types, Posts
-from Main.serializers import UsersSerializer, TypesSerializer, PostsSerializer
+from Main.serializers import UsersSerializer, TypesSerializer, PostSerializer, PostsSerializer
 
 from django.core.files.storage import default_storage
 
@@ -63,21 +63,20 @@ def typesApi(request, id=0):
         return JsonResponse("Type deleted successfully!", safe=False)
 
 @csrf_exempt
-def postsApi(request, id=0):
-    if request.method=='GET' and id>0:
-        try:
-            post = Posts.objects.get(PostId = id)
-            posts_serializer = PostsSerializer(post, many=False)
+def postsApi(request, type=0):
+    if request.method=='GET':
+        if type>0:
+            posts = Posts.objects.filter(Type = type)
+            posts_serializer = PostsSerializer(posts, many=True)
             return JsonResponse(posts_serializer.data, safe=False)
-        except ObjectDoesNotExist:
-            return JsonResponse("error", safe=False)
-    elif request.method=='GET':
-        posts = Posts.objects.all()
-        posts_serializer = PostsSerializer(posts, many=True)
-        return JsonResponse(posts_serializer.data, safe=False)
+        else:
+            posts = Posts.objects.all()
+            posts_serializer = PostsSerializer(posts, many=True)
+            return JsonResponse(posts_serializer.data, safe=False)
     elif request.method=='POST':
         posts_data = JSONParser().parse(request)
-        posts_serializer = PostsSerializer(data=posts_data)
+        posts_serializer = PostSerializer(data=posts_data)
+        print (posts_serializer)
         if posts_serializer.is_valid():
             posts_serializer.save()
             return JsonResponse("Posts added successfully!", safe=False)
@@ -85,11 +84,22 @@ def postsApi(request, id=0):
     elif request.method=='PUT':
         posts_data = JSONParser().parse(request)
         posts = Posts.objects.get(PostId = posts_data['PostId'])
-        posts_serializer = PostsSerializer(posts, data=posts_data)
+        posts_serializer = PostSerializer(posts, data=posts_data)
+        print (posts_serializer)
         if posts_serializer.is_valid():
             posts_serializer.save()
             return JsonResponse("Post updated successfully!", safe=False)
         return JsonResponse("Failed to update post", safe=False)
+    
+@csrf_exempt
+def postApi(request, id):
+    if request.method=='GET':
+        try:
+            post = Posts.objects.get(PostId = id)
+            posts_serializer = PostsSerializer(post)
+            return JsonResponse(posts_serializer.data, safe=False)
+        except ObjectDoesNotExist:
+            return JsonResponse("error", safe=False)
     elif request.method=='DELETE':
         posts = Posts.objects.get(PostId = id)
         posts.delete()
