@@ -21,7 +21,7 @@ export const site: Routes = [
   {path:'details/:id', component:PostdetailsComponent},
   {path: '**', redirectTo: ''}
 ];
-
+//checking if user is logged, changing site's route
 function CheckLog(){
   if(localStorage.getItem('logged')=='1'){
     return site;

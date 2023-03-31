@@ -1,8 +1,10 @@
+<!--loaded wait till data is loaded-->
 <div class="container" *ngIf="loaded | async">
     <div class="container" *ngIf="postData != 'error'">
+        <!--buttons are shown if user is author-->
         <div *ngIf="postData.User.UserId==userId">
             <button class="btn btn-primary" (click)="openAddModal(postData)">Edit</button>
-            <button (click)="deleteArticule(postData.PostId)" class="btn btn-primary" data-bs-toggle="modal">Delete Articule</button>
+            <button (click)="deletePost(postData.PostId)" class="btn btn-primary" data-bs-toggle="modal">Delete Articule</button>
         </div>
         <img [src]=postData.PostPhoto width="200px" height="220px"/>
         <h1>{{postData.PostTitle}}</h1><hr> 
@@ -13,6 +15,7 @@
             {{postData.PostContent}}
         </div>
     </div>
+    <!--if post doesn't exist it shows this-->
     <div class="container" *ngIf="postData == 'error'">
         <h1>Post doesn't exist! </h1>
     </div>

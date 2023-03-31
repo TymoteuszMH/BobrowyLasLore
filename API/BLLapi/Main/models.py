@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 import datetime
 
+#all modals used on site
 class Users(models.Model):
     UserId = models.AutoField(primary_key=True, null=False, unique=True)
     Username = models.CharField(max_length=100, unique=True)

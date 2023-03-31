@@ -16,8 +16,8 @@ export class NavbarComponent{
   logged = this.logindata.logged
   login = this.logindata.userName
   logId = this.logindata.userId
-
-  Logout(){
+  //changing data after logout
+  logout(){
     localStorage.setItem('logged','0')
     localStorage.setItem('userid','0')
     localStorage.setItem('username','')

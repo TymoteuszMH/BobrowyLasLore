@@ -13,9 +13,12 @@ import { DeletepostComponent } from '../deletepost/deletepost.component';
 })
 export class CharactersComponent {
   charactersList:IPost[] = [];
+  charactersListWithoutFilters:IPost[] = [];
   author = false;
   data:any;
   modalTitle = "";
+  titleFilter = "";
+  authorFilter = "";
 
   constructor(
     private service: SheredService,
@@ -27,7 +30,8 @@ export class CharactersComponent {
   ngOnInit(){
     this.getCharactersList();
   }
-
+  
+  //opening modal with ngbootstrap use, checking if modal should be edit or adding, refreshing data after closing modal
   openAddModal(edit:boolean, data:any = {}) {
     const modalRef = this.modalService.open(AddpostComponent,
       {
@@ -50,6 +54,7 @@ export class CharactersComponent {
                 }
       
     }
+    //sending needed data to modal
     modalRef.componentInstance.data = this.data;
     modalRef.componentInstance.modalTitle = this.modalTitle;
     modalRef.componentInstance.posts = this.charactersList;
@@ -57,13 +62,14 @@ export class CharactersComponent {
     modalRef.componentInstance.edit = edit;
     modalRef.result.then(()=>{this.getCharactersList();});
   }
-
+  //getting post by type for list and filters
   getCharactersList(){
     this.service.getPostbyType(1).subscribe(data=>{
-      this.charactersList = data
+      this.charactersList = data;
+      this.charactersListWithoutFilters = data;
     });
   }
-
+  //opening delete modal with needed data, refreshing data after closing modal
   deleteCharacter(id:any){
     const modalRef = this.modalService.open(DeletepostComponent,
       {
@@ -74,8 +80,21 @@ export class CharactersComponent {
     modalRef.componentInstance.id = id;
   modalRef.result.then(()=>{this.getCharactersList();});
   }
-
+  //going to post details
   goToDetails(id:any){
     this.router.navigate([ '/details', id]);
+  }
+  //implementing filter to data
+  filter(){
+    var titleFilter = this.titleFilter;
+    var authorFilter = this.authorFilter;
+
+    this.charactersList = this.charactersListWithoutFilters.filter(function (el){
+      return el.PostTitle.toString().toLowerCase().includes(
+        titleFilter.toString().trim().toLowerCase()
+      )&&el.User.Username.toString().toLowerCase().includes(
+        authorFilter.toString().trim().toLowerCase()
+      )
+    })
   }
 }

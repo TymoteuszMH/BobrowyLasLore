@@ -12,6 +12,7 @@ export class SheredService {
 
   constructor(private http:HttpClient) { }
 
+  //all api functions
   getUsers():Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + '/users/')
   }
@@ -22,14 +23,6 @@ export class SheredService {
 
   updateUser(val:any){
     return this.http.put(this.APIUrl + '/users/', val)
-  }
-
-  deleteUser(val:any){
-    return this.http.put(this.APIUrl + '/users/', val)
-  }
-
-  getTypes():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/types/')
   }
 
   getPosts():Observable<any[]>{
@@ -62,10 +55,10 @@ export class SheredService {
 
 }
 
+//place to store data of logged user
 export class LoginData{
   public logged:any = localStorage.getItem('logged');
   public userId:any = localStorage.getItem('userid');
   public userName: any = localStorage.getItem('username');
-  public Password: any = localStorage.getItem('password');
-  // public language: any = localStorage.getItem('language');
+  public password: any = localStorage.getItem('password');
 }

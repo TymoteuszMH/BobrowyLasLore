@@ -8,10 +8,9 @@ import { SheredService } from '../../helpers/shered.service';
   styleUrls: ['./deletepost.component.css']
 })
 export class DeletepostComponent {
-  
- postId = 0;
-
- @Input() id:any;
+  @Input() id:any;
+  postId = 0;
+  done = false
 
   constructor(
     
@@ -22,13 +21,14 @@ export class DeletepostComponent {
   ngOnInit(){
     this.postId = this.id
   }
-
+  //deleting post in api
   deletePost(){
-    var done = false;
-    this.service.deletePost(this.id).subscribe(()=>{done = true; this.closeModal('added post!');});
-    this.closeModal('post deleted!');
+    this.service.deletePost(this.id).subscribe(()=>{
+      this.done = true; 
+      setTimeout(() => {this.closeModal('post deleted!');}, 200)
+    });
   }
-
+  //closing modal
   closeModal(sendData: any) {
     this.activeModal.close(sendData);
   }

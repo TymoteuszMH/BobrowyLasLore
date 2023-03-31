@@ -10,16 +10,6 @@ import { SheredService } from '../helpers/shered.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  
-  
-  constructor(
-    private service: SheredService,
-    private router: Router,
-    protected validation: ValidationService,
-  ){}
-
-
-
   userid=0;
   username="";
   password="";
@@ -29,17 +19,23 @@ export class LoginComponent implements OnInit{
   err=false;
   users: any = [];
 
+  constructor(
+    private service: SheredService,
+    private router: Router,
+    protected validation: ValidationService,
+  ){}
+
   ngOnInit(){
     this.getUsers();
   }
-
+  //getting all user to check later if form data is correct
   getUsers(){
     this.service.getUsers().subscribe(data=>{
       this.users = data;
     }) 
   }
-
-  ChangeForm(){
+  //chenging type of form 
+  changeForm(){
     this.username="";
     this.password="";
     if(this.signup){
@@ -52,13 +48,13 @@ export class LoginComponent implements OnInit{
       this.signup=true;
     }
   }
-
-  SignIn(){
+  //sign in method, getting data from fields and validating them, if data is correct, router changes to site routes and window is moving to main site
+  signIn(){
     this.acc_created = false;
     var val = { UserId: this.userid,
           Username: this.username,
           Password: this.password}
-    var logged = this.validation.ValidateUser(val, true, this.users);
+    var logged = this.validation.validateUser(val, true, this.users);
     if(logged){
       localStorage.setItem('logged', '1');
       this.router.resetConfig(site);
@@ -68,15 +64,15 @@ export class LoginComponent implements OnInit{
       this.err=true;
     }
   }
-
-  SignUp(){
+  //sign up method, validating data from form, and if everything is correct, adding user and changing to sign in form
+  signUp(){
     var val = { Username: this.username,
           Password: this.password}
-    var signup_val = this.validation.ValidateUser(val, false, this.users);
+    var signup_val = this.validation.validateUser(val, false, this.users);
     if(signup_val){
       this.service.addUser(val).subscribe()
       this.acc_created=true;
-      this.ChangeForm()
+      this.changeForm()
     }else{
       this.err=true;
     }

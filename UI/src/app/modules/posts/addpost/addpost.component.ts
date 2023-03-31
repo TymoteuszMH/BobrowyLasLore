@@ -14,6 +14,7 @@ export class AddpostComponent implements OnInit{
   @Input() posts:any;
   @Input() type:any;
   @Input() edit = false;
+  done = false
   err = false;
   postId = 0;
   postTitle = "";
@@ -27,18 +28,18 @@ export class AddpostComponent implements OnInit{
     protected validation: ValidationService,
     public activeModal: NgbActiveModal
   ){}
-
+  //aligning input data to local data
   ngOnInit(){
     this.postId = this.data.PostId
     this.postTitle = this.data.PostTitle;
     this.photoFilePath = this.data.PostPhotoPath;
     this.postContent = this.data.PostContent;
   }
-
+  //function to close modal
   closeModal(sendData: any) {
     this.activeModal.close(sendData);
   }
-
+  //uploading photo to api
   uploadPhoto(event:any){
     var file = event.target.files[0];
     const formData:FormData=new FormData();
@@ -49,25 +50,26 @@ export class AddpostComponent implements OnInit{
       this.photoFilePath=this.service.PhotoUrl+this.photoFileName;
     })
   }
-
+  //adding post, validating it's data, if everything is correct, it waits some time, so the data could reload without any problems
   addPost(){
-    var done;
     var val={Type: this.type,
             User: this.logindata.userId,
             PostTitle: this.postTitle,
             PostPhoto: this. photoFilePath,
             PostContent: this.postContent
       }
-    var validate = this.validation.ValidatePost(val, false, this.posts)
+    var validate = this.validation.validatePost(val, this.posts)
     if (validate){
-      this.service.addPosts(val).subscribe(()=>{done = true; this.closeModal('added post!');});
+      this.service.addPosts(val).subscribe(()=>{
+        this.done = true; 
+        setTimeout(() => {this.closeModal('added post!');}, 200)
+      });
     }else{
       this.err = true;
     }
   }
-
-  async editPost(){
-    var done = false;
+  //editing post, validating it's data, if everything is correct, it waits some time, so the data could reload without any problems
+  editPost(){
     var val={PostId: this.postId,
             Type: this.type,
             User: this.logindata.userId,
@@ -75,9 +77,12 @@ export class AddpostComponent implements OnInit{
             PostPhoto: this. photoFilePath,
             PostContent: this.postContent
             }
-    var validate = this.validation.ValidatePost(val, true, this.posts)
+    var validate = this.validation.validatePost(val, this.posts)
     if (validate){
-      this.service.updatePosts(val).subscribe(()=>{done = true; this.closeModal('changes saved!');});
+      this.service.updatePosts(val).subscribe(()=>{
+        this. done = true; 
+        setTimeout(() => {this.closeModal('changes saved!');}, 200)
+      });
     }else{
       this.err = true;
     }

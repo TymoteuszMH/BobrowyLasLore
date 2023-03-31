@@ -5,13 +5,14 @@ from django.http.response import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from Main.models import Users, Types, Posts
-from Main.serializers import UsersSerializer, TypesSerializer, PostSerializer, PostsSerializer
+from Main.serializers import UsersSerializer, PostSerializer, PostsSerializer
 
 from django.core.files.storage import default_storage
 
 # Create your views here.
+#Api for users don't need deleting user, because there is no such option on site
 @csrf_exempt
-def usersApi(request, id=0):
+def usersApi(request):
     if request.method=='GET':
         user = Users.objects.all()
         user_serializer = UsersSerializer(user, many=True)
@@ -31,37 +32,8 @@ def usersApi(request, id=0):
             user_serializer.save()
             return JsonResponse("User updated successfully!", safe=False)
         return JsonResponse("Failed to update user", safe=False)
-    elif request.method=='DELETE':
-        user = Users.objects.get(UserId = id)
-        user.delete()
-        return JsonResponse("User deleted successfully!", safe=False)
-    
-@csrf_exempt
-def typesApi(request, id=0):
-    if request.method=='GET':
-        types = Types.objects.all()
-        types_serializer = TypesSerializer(types, many=True)
-        return JsonResponse(types_serializer.data, safe=False)
-    elif request.method=='POST':
-        type_data = JSONParser().parse(request)
-        types_serializer = TypesSerializer(data=type_data)
-        if types_serializer.is_valid():
-            types_serializer.save()
-            return JsonResponse("Type added successfully!", safe=False)
-        return JsonResponse("Failed to add type", safe=False)
-    elif request.method=='PUT':
-        types_data = JSONParser().parse(request)
-        types = Types.objects.get(TypeId = types_data['TypeId'])
-        types_serializer = TypesSerializer(types, data=types_data)
-        if types_serializer.is_valid():
-            types_serializer.save()
-            return JsonResponse("Type updated successfully!", safe=False)
-        return JsonResponse("Failed to update type", safe=False)
-    elif request.method=='DELETE':
-        types = Types.objects.get(TypeId = id)
-        types.delete()
-        return JsonResponse("Type deleted successfully!", safe=False)
-
+#types doesn't need any api
+#there is 1st post api for getting things by type and adding or editing post
 @csrf_exempt
 def postsApi(request, type=0):
     if request.method=='GET':
@@ -90,7 +62,7 @@ def postsApi(request, type=0):
             posts_serializer.save()
             return JsonResponse("Post updated successfully!", safe=False)
         return JsonResponse("Failed to update post", safe=False)
-    
+#and there is 2nd for getting post by id and deleting post
 @csrf_exempt
 def postApi(request, id):
     if request.method=='GET':
@@ -104,7 +76,7 @@ def postApi(request, id):
         posts = Posts.objects.get(PostId = id)
         posts.delete()
         return JsonResponse("Post deleted successfully!", safe=False)
-
+#here's serializer for adding files
 @csrf_exempt
 def saveFile(request):
     file = request.FILES['uploadedFile']

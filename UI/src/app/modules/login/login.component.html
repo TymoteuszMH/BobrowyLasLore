@@ -5,13 +5,16 @@
                 <h1>Welcome!</h1>
             </div>
             <div class="form-fruop row">
+                <!--messeges for error and successful adding user-->
                 <div class="alert alert-success" *ngIf="acc_created">Account created successfully!</div>
                 <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
+                <!--orm fields-->
                 <label class="col-form-label">Username:</label><input type="text" [(ngModel)]="username" class="form-control"/>
                 <label class="col-form-label">Password:</label><input type="password" [(ngModel)]="password" class="form-control"/>
-                <a (click)="ChangeForm()" class="btn-link">{{form}}</a>
-                <button (click)="SignUp()" *ngIf="signup" class="btn btn-primary">Sign up</button>
-                <button (click)="SignIn()" *ngIf="!signup" class="btn btn-primary">Sign in</button>
+                <!--here are buttons for changing form-->
+                <a (click)="changeForm()" class="btn-link">{{form}}</a>
+                <button (click)="signUp()" *ngIf="signup" class="btn btn-primary">Sign up</button>
+                <button (click)="signIn()" *ngIf="!signup" class="btn btn-primary">Sign in</button>
             </div>
         </div>
     </div>

@@ -11,13 +11,13 @@ export class UserComponent{
   
   constructor(
     private service: SheredService,
-    private logindata: LoginData,
+    private loginData: LoginData,
     protected validation: ValidationService
   ){}
 
-  userID = this.logindata.userId;
-  username = this.logindata.userName;
-  password = this.logindata.Password;
+  userID = this.loginData.userId;
+  username = this.loginData.userName;
+  password = this.loginData.password;
   err_mes = "";
   err = false;
   users:any=[];
@@ -25,18 +25,18 @@ export class UserComponent{
   ngOnInit(){
     this.getUsers();
   }
-
+  //getting users for later validation
   getUsers(){
     this.service.getUsers().subscribe(data=>{
       this.users = data;
     }) 
   }
-  
-  ChangeUserdata(){
+  //checking if edited data is valid, if yes - changing local variables, sending update request and reloading page
+  changeUserdata(){
     var val = { UserId: this.userID,
                 Username: this.username,
                 Password: this.password}
-    var validate = this.validation.ValidateUser(val, false, this.users);
+    var validate = this.validation.validateUser(val, false, this.users);
     if(validate){
       localStorage.setItem('username', val.Username);
       localStorage.setItem('password', val.Password);

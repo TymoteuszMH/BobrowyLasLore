@@ -13,7 +13,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('close')">Close</button>
-    <button type="button" *ngIf="!edit" class="btn btn-primary" (click)="addPost()">Save changes</button>
-    <button type="button" *ngIf="edit" class="btn btn-primary" (click)="editPost()">Save changes</button>
+    <button type="button" *ngIf="!edit" [ngClass]="{'disabled' : done}" class="btn btn-primary" (click)="addPost()">Save changes</button>
+    <button type="button" *ngIf="edit" [ngClass]="{'disabled' : done}" class="btn btn-primary" (click)="editPost()">Save changes</button>
   </div>
 </div>

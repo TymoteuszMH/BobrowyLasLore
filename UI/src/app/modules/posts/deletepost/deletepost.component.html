@@ -9,5 +9,5 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('close')">No</button>
-    <button type="button" class="btn btn-primary" (click)="deletePost()">Yes</button>
+    <button type="button" class="btn btn-primary" [ngClass]="{'disabled' : done}" (click)="deletePost()">Yes</button>
   </div>

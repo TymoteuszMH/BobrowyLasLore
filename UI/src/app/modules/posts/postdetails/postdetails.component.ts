@@ -21,8 +21,6 @@ export class PostdetailsComponent {
   exist: boolean = false;
   modalTitle: string ="";
 
-  
-  
   constructor(
     private logindata: LoginData,
     private route: ActivatedRoute,
@@ -30,13 +28,13 @@ export class PostdetailsComponent {
     private modalService: NgbModal,
     private router: Router
   ){}
-
+  //getting id from url
   ngOnInit(){
     const tempID = this.route.snapshot.paramMap.get("id");
-    this.GetPost(tempID);
+    this.getPost(tempID);
     this.getPosts();
   }
-
+  //opening edit modal, refreshing data after close
   openAddModal(data:any) {
     const modalRef = this.modalService.open(AddpostComponent,
       {
@@ -52,10 +50,10 @@ export class PostdetailsComponent {
     modalRef.componentInstance.type = 2;
     modalRef.componentInstance.edit = true;
     
-    modalRef.result.then(()=>{this.GetPost(data.PostId);});
+    modalRef.result.then(()=>{this.getPost(data.PostId);});
   }
-  
-  deleteArticule(id:any){
+  //deleting post, going to main page after deleting
+  deletePost(id:any){
     const modalRef = this.modalService.open(DeletepostComponent,
       {
         scrollable: false,
@@ -65,14 +63,14 @@ export class PostdetailsComponent {
     modalRef.componentInstance.id = id;
   modalRef.result.then(()=>{this.router.navigate([ '/'+this.postData.Type.Type ]);});
   }
-
-
-  GetPost(id:any){
+  //getting post by id
+  getPost(id:any){
     this.service.getPost(id).subscribe(data=>{
       this.postData = data;
       this.loaded = Promise.resolve(true);
     })
   }
+  //getting post type's elements for validating title
   getPosts(){
     this.service.getPosts().subscribe(data=>{
       data.forEach((element: any, index:any) => {

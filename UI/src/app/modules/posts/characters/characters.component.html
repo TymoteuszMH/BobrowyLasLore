@@ -1,9 +1,17 @@
 <div class="container">
-    <button (click)="openAddModal(false)" class="add    btn btn-primary" data-bs-toggle="modal">Add Character</button><hr>
+    <!--button to open add modal-->
+    <button (click)="openAddModal(false)" class="add btn btn-primary" data-bs-toggle="modal">Add Character</button>
+    <div class="search">
+        <!--filters inputs-->
+        <input [(ngModel)]="titleFilter" class="form-control" (keyup)="filter()" placeholder="Search by title">
+        <input [(ngModel)]="authorFilter" class="form-control" (keyup)="filter()" placeholder="Search by author">
+    </div><hr>
+    <!--cards with data-->
     <div *ngFor="let data of charactersList">
         <div class="card mx-auto post-cards">
                 <div class="card-header">
                     <h3 class="card-title">{{data.PostTitle}}
+                    <!--dropdown menu shown only if user is author of the post-->
                     <div class="btn-group dropstart float-end" *ngIf="data.User.UserId == logindata.userId">
                         <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
