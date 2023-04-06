@@ -6,5 +6,6 @@ Login module with sign in and sign up forms in it,
 User module where user can change account data,
 Post module with 3 functions: showing posts list depending on it's type, showing each post details, adding, editing and removing posts.
 
-You can activate local servers with batch files located in .bat forlder. 
+You can activate local servers with batch files located in .bat forlder.
+
 !rundjango.bat is downloading needed venv packages, but you still need to download node.js and angular on your own!
