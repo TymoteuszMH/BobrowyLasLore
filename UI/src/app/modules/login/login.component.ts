@@ -30,9 +30,7 @@ export class LoginComponent implements OnInit{
   }
   //getting all user to check later if form data is correct
   getUsers(){
-    this.service.getUsers().subscribe(data=>{
-      this.users = data;
-    }) 
+
   }
   //chenging type of form 
   changeForm(){
@@ -54,7 +52,7 @@ export class LoginComponent implements OnInit{
     var val = { UserId: this.userid,
           Username: this.username,
           Password: this.password}
-    var logged = this.validation.validateUser(val, true, this.users);
+    var logged = this.validation.validateUser(val, true);
     if(logged){
       localStorage.setItem('logged', '1');
       this.router.resetConfig(site);
@@ -68,7 +66,7 @@ export class LoginComponent implements OnInit{
   signUp(){
     var val = { Username: this.username,
           Password: this.password}
-    var signup_val = this.validation.validateUser(val, false, this.users);
+    var signup_val = this.validation.validateUser(val, false);
     if(signup_val){
       this.service.addUser(val).subscribe()
       this.acc_created=true;

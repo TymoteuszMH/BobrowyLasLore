@@ -16,7 +16,7 @@ export class ValidationService {
   ){}
 
   //validating user, checking if there any white spaces and if password is long enough
-  validateUser(val: any, signin: boolean, users:any){
+  validateUser(val: any, signin: boolean){
     if(val.Username=="" || val.Password==""){
       this.err_mes="Fill in the fields!";
       return false;
@@ -36,11 +36,11 @@ export class ValidationService {
     if(signin){
       this.err_mes="Incorrect username or password!";
       //going to check if user exist on login in
-      return this.check.SignInCheck(val, users);
+      return this.check.SignInCheck(val);
     }else{
       //going to check if user exist on sign up
       this.err_mes="User already exist!";
-      return this.check.SignUpCheck(val, users);
+      return this.check.SignUpCheck(val);
     }
   }
 

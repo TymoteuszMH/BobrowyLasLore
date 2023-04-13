@@ -4,34 +4,37 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
-from Main.models import Users, Types, Posts
+from Main.models import Users, Posts
 from Main.serializers import UsersSerializer, PostSerializer, PostsSerializer
 
 from django.core.files.storage import default_storage
 
 # Create your views here.
-#Api for users don't need deleting user, because there is no such option on site
+#api for login don't need deleting user, because there is no such option on site
 @csrf_exempt
-def usersApi(request):
+def loginApi(request):
     if request.method=='GET':
-        user = Users.objects.all()
-        user_serializer = UsersSerializer(user, many=True)
-        return JsonResponse(user_serializer.data, safe=False)
+        user_data = JSONParser().parse(request)
+        try: 
+            user = Users.objects.get(Password = user_data['Password'])
+            return JsonResponse('logged', safe=False)
+        except ObjectDoesNotExist:
+            return JsonResponse("error", safe=False)
     elif request.method=='POST':
         user_data = JSONParser().parse(request)
         user_serializer = UsersSerializer(data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("User added successfully!", safe=False)
-        return JsonResponse("Failed to add user", safe=False)
+            return JsonResponse("created", safe=False)
+        return JsonResponse("error", safe=False)
     elif request.method=='PUT':
         user_data = JSONParser().parse(request)
         user = Users.objects.get(UserId = user_data['UserId'])
         user_serializer = UsersSerializer(user, data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("User updated successfully!", safe=False)
-        return JsonResponse("Failed to update user", safe=False)
+            return JsonResponse("created", safe=False)
+        return JsonResponse("error", safe=False)
 #types doesn't need any api
 #there is 1st post api for getting things by type and adding or editing post
 @csrf_exempt

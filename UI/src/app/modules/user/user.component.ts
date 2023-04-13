@@ -27,16 +27,13 @@ export class UserComponent{
   }
   //getting users for later validation
   getUsers(){
-    this.service.getUsers().subscribe(data=>{
-      this.users = data;
-    }) 
   }
   //checking if edited data is valid, if yes - changing local variables, sending update request and reloading page
   changeUserdata(){
     var val = { UserId: this.userID,
                 Username: this.username,
                 Password: this.password}
-    var validate = this.validation.validateUser(val, false, this.users);
+    var validate = this.validation.validateUser(val, false);
     if(validate){
       localStorage.setItem('username', val.Username);
       localStorage.setItem('password', val.Password);
