@@ -20,14 +20,7 @@ export class UserComponent{
   password = this.loginData.password;
   err_mes = "";
   err = false;
-  users:any=[];
 
-  ngOnInit(){
-    this.getUsers();
-  }
-  //getting users for later validation
-  getUsers(){
-  }
   //checking if edited data is valid, if yes - changing local variables, sending update request and reloading page
   changeUserdata(){
     var val = { UserId: this.userID,
@@ -35,10 +28,15 @@ export class UserComponent{
                 Password: this.password}
     var validate = this.validation.validateUser(val, false);
     if(validate){
-      localStorage.setItem('username', val.Username);
-      localStorage.setItem('password', val.Password);
-      this.service.updateUser(val).subscribe();
-      window.location.reload();
+      this.service.updateUser(val).subscribe(res=>{
+        if(res == "added"){
+          localStorage.setItem('username', val.Username);
+          localStorage.setItem('password', val.Password);
+          window.location.reload();
+        }else{
+          this.err=true;
+        }
+      });
     }else{
       this.err=true;
     }

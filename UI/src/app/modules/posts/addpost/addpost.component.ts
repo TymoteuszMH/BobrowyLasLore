@@ -80,7 +80,7 @@ export class AddpostComponent implements OnInit{
     var validate = this.validation.validatePost(val, this.posts)
     if (validate){
       this.service.updatePosts(val).subscribe(()=>{
-        this. done = true; 
+        this.done = true; 
         setTimeout(() => {this.closeModal('changes saved!');}, 200)
       });
     }else{

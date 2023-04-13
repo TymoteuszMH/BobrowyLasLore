@@ -13,28 +13,32 @@ from django.core.files.storage import default_storage
 #api for login don't need deleting user, because there is no such option on site
 @csrf_exempt
 def loginApi(request):
-    if request.method=='GET':
+    try:
         user_data = JSONParser().parse(request)
-        try: 
-            user = Users.objects.get(Password = user_data['Password'])
+        user = Users.objects.get(Username = user_data['Username'])
+        if user.Password == user_data['Password']:
             return JsonResponse('logged', safe=False)
-        except ObjectDoesNotExist:
-            return JsonResponse("error", safe=False)
-    elif request.method=='POST':
+        return JsonResponse("error", safe=False)
+    except ObjectDoesNotExist:
+        return JsonResponse("error", safe=False)
+
+@csrf_exempt
+def usersApi(request):
+    if request.method=='POST':
         user_data = JSONParser().parse(request)
         user_serializer = UsersSerializer(data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("created", safe=False)
-        return JsonResponse("error", safe=False)
+            return JsonResponse("added", safe=False)
+        return JsonResponse("err", safe=False)
     elif request.method=='PUT':
         user_data = JSONParser().parse(request)
         user = Users.objects.get(UserId = user_data['UserId'])
         user_serializer = UsersSerializer(user, data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("created", safe=False)
-        return JsonResponse("error", safe=False)
+            return JsonResponse("added", safe=False)
+        return JsonResponse("err", safe=False)
 #types doesn't need any api
 #there is 1st post api for getting things by type and adding or editing post
 @csrf_exempt
