@@ -10,7 +10,7 @@ from Main.serializers import UsersSerializer, PostSerializer, PostsSerializer
 from django.core.files.storage import default_storage
 
 # Create your views here.
-#api for login don't need deleting user, because there is no such option on site
+#logging api that's checks if password and username are correct
 @csrf_exempt
 def loginApi(request):
     try:
@@ -21,7 +21,8 @@ def loginApi(request):
         return JsonResponse("error", safe=False)
     except ObjectDoesNotExist:
         return JsonResponse("error", safe=False)
-
+#api for user don't need deleting user, because there is no such option on site
+#get method gets only user id based on username
 @csrf_exempt
 def usersApi(request, username=""):
     if request.method=='GET':
