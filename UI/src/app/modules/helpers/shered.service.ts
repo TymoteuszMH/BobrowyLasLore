@@ -8,13 +8,17 @@ import { Observable } from 'rxjs';
 
 export class SheredService {
   readonly APIUrl = "http://127.0.0.1:8000";
-  readonly PhotoUrl = "http://127.0.0.1:8000/media/";
+  readonly PhotoUrl = "http://127.0.0.1:8000/media";
 
   constructor(private http:HttpClient) { }
 
   //all api functions
-  getUsers():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/users/')
+  login(val:any){
+    return this.http.post(this.APIUrl + '/login/', val)
+  }
+
+  getUserId(username:any):Observable<any>{
+    return this.http.get<any>(this.APIUrl + '/users/' + username)
   }
 
   addUser(val:any){

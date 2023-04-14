@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { login } from 'src/app/app-routing.module';
+import { Component } from '@angular/core';
 import { LoginData } from '../helpers/shered.service';
+import { ChangerouteService } from '../helpers/changeroute.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,20 +9,18 @@ import { LoginData } from '../helpers/shered.service';
 })
 export class NavbarComponent{
   constructor(public logindata: LoginData,
-              private router: Router){}
+              private changeroute: ChangerouteService){}
 
 
-  logged = this.logindata.logged
-  login = this.logindata.userName
-  logId = this.logindata.userId
+  logged = this.logindata.logged;
+  login = this.logindata.userName;
+  logId = this.logindata.userId;
   //changing data after logout
   logout(){
-    localStorage.setItem('logged','0')
-    localStorage.setItem('userid','0')
-    localStorage.setItem('username','')
-    this.router.resetConfig(login);
-    this.router.navigate([ '/' ]);
-    window.location.reload();
+    localStorage.setItem('logged','0');
+    localStorage.setItem('userid','0');
+    localStorage.setItem('username','');
+    this.changeroute.change(false);
   }
 
 }

@@ -7,9 +7,10 @@ from django.conf import settings
 #all needed paterns for api, there is one path for getting post by id and one for getting post by type
 urlpatterns = [
     path('users/', views.usersApi),
-
-    path('posts/', views.postsApi),
+    path('users/<str:username>', views.usersApi),
+    path('login/', views.loginApi),
     path('post/<int:id>', views.postApi),
+    path('posts/', views.postsApi),
     path('posts/<int:type>', views.postsApi),
     
     path('saveFiles/', views.saveFile),
