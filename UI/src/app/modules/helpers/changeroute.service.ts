@@ -8,7 +8,7 @@ import { login, site } from 'src/app/app-routing.module';
 export class ChangerouteService {
 
   constructor(private router: Router) { }
-
+  //function to change routing
   change(logged: boolean){
     if(logged){
       this.router.resetConfig(site);

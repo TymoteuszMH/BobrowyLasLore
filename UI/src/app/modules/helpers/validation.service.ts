@@ -35,10 +35,8 @@ export class ValidationService {
     }
     if(signin){
       this.err_mes="Incorrect username or password!";
-      //going to check if user exist on login in
       return true;
     }else{
-      //going to check if user exist on sign up
       this.err_mes="User already exist!";
       return true;
     }

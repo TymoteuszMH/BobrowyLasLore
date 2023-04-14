@@ -39,6 +39,7 @@ export class LoginComponent{
     }
   }
   //sign in method, getting data from fields and validating them, if data is correct, router changes to site routes and window is moving to main site
+  //data is check via sending post to api, and returning logged or err, then if data is correct, id is taken from api
   signIn(){
     this.acc_created = false;
     var val = {Username: this.username,
