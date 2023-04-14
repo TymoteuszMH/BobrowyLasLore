@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 
 export class SheredService {
-  readonly APIUrl = "http://127.0.0.1:8000";
-  readonly PhotoUrl = "http://127.0.0.1:8000/media";
+  readonly APIUrl = "http://timmhus104.pythonanywhere.com";
+  readonly PhotoUrl = "http://timmhus104.pythonanywhere.com/media";
 
   constructor(private http:HttpClient) { }
 
