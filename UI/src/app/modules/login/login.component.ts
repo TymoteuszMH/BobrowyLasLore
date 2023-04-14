@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { site } from 'src/app/app-routing.module';
 import { ValidationService } from '../helpers/validation.service';
 import { SheredService } from '../helpers/shered.service';
 import { ChangerouteService } from '../helpers/changeroute.service';
@@ -43,17 +41,18 @@ export class LoginComponent{
   //sign in method, getting data from fields and validating them, if data is correct, router changes to site routes and window is moving to main site
   signIn(){
     this.acc_created = false;
-    var val = { UserId: this.userid,
-          Username: this.username,
-          Password: this.password}
+    var val = {Username: this.username,
+              Password: this.password}
     var logged = this.validation.validateUser(val, true);
     if(logged){
-      this.service.Login(val).subscribe(res=>{
+      this.service.login(val).subscribe(res=>{
         if(res == "logged"){
           logged = true;
-          localStorage.setItem('userid', val.UserId.toString());
           localStorage.setItem('username', val.Username);
           localStorage.setItem('password', val.Password);
+          this.service.getUserId(val.Username).subscribe(res=>{
+            localStorage.setItem('userid', res.toString());
+          })
           localStorage.setItem('logged', '1');
           this.changeroute.change(true)
         }else{

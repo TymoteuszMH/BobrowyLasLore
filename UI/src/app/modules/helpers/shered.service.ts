@@ -13,8 +13,12 @@ export class SheredService {
   constructor(private http:HttpClient) { }
 
   //all api functions
-  Login(val:any){
+  login(val:any){
     return this.http.post(this.APIUrl + '/login/', val)
+  }
+
+  getUserId(username:any):Observable<any>{
+    return this.http.get<any>(this.APIUrl + '/users/' + username)
   }
 
   addUser(val:any){

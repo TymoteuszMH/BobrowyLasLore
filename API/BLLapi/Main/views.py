@@ -23,8 +23,15 @@ def loginApi(request):
         return JsonResponse("error", safe=False)
 
 @csrf_exempt
-def usersApi(request):
-    if request.method=='POST':
+def usersApi(request, username=""):
+    if request.method=='GET':
+        try:
+            user = Users.objects.get(Username = username)
+            user_serializer = UsersSerializer(user)
+            return JsonResponse(user_serializer.data['UserId'], safe=False)
+        except ObjectDoesNotExist:
+            return JsonResponse("error", safe=False)
+    elif request.method=='POST':
         user_data = JSONParser().parse(request)
         user_serializer = UsersSerializer(data=user_data)
         if user_serializer.is_valid():
