@@ -1,6 +1,7 @@
 .post-cards{
     text-decoration:none; 
     width: 30rem;
+    min-width: 18rem;
     transition: 0.5s;
 }
 .post-cards:hover{
