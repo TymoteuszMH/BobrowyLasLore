@@ -7,14 +7,17 @@ body{
     background-size: cover;
     background-position: center; 
 }
+.text{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+}
 .post-cards{
-    color: black !important;
     text-decoration:none; 
     transition: 0.5s;
 }
 .post-cards:hover{
     filter: brightness(85%);
-    color: black;
 }
 .lan{
     z-index: 1;
@@ -26,4 +29,7 @@ body{
 .add{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.mdl{
+    color: black;
 }

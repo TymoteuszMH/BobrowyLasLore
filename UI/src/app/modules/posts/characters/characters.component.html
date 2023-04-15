@@ -8,7 +8,7 @@
     </div><hr>
     <!--cards with data-->
     <div *ngFor="let data of charactersList">
-        <div class="card mx-auto post-cards">
+        <div class="card mx-auto post-cards text-bg-dark">
                 <div class="card-header">
                     <h3 class="card-title">{{data.PostTitle}}
                     <!--dropdown menu shown only if user is author of the post-->
@@ -22,11 +22,11 @@
                         </ul>
                     </div></h3><hr>
                 </div>
-                <a (click)="goToDetails(data.PostId)" class="btn">
-                <div class="card-body float-start">
-                    <h5 class="card-text float-start">{{data.User.Username}}</h5><br>
-                    <h6 class="card-text float-start">{{data.CreationDate}}</h6>
-                </div>
+                <a (click)="goToDetails(data.PostId)" class="btn card-body">
+                    <div class="float-start">
+                        <h5 class="card-text float-start">{{data.User.Username}}</h5><br>
+                        <h6 class="card-text float-start">{{data.CreationDate}}</h6>
+                    </div>
                 </a>
         </div>
         <br>

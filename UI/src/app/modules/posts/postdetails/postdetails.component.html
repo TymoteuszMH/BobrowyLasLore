@@ -6,13 +6,15 @@
             <button class="btn btn-primary" (click)="openAddModal(postData)">Edit</button>
             <button (click)="deletePost(postData.PostId)" class="btn btn-primary" data-bs-toggle="modal">Delete Articule</button>
         </div>
-        <img [src]=postData.PostPhoto width="200px" height="220px"/>
-        <h1>{{postData.PostTitle}}</h1><hr> 
-        <h3>Author: {{postData.User.Username}}</h3><br>
-        <h4>Date: {{postData.CreationDate}}</h4><br>
-        <h6>Type: {{postData.Type.Type}}</h6><hr>
-        <div class="container">
-            {{postData.PostContent}}
+        <div class = "text">
+            <img [src]=postData.PostPhoto width="200px" height="220px"/>
+            <h1>{{postData.PostTitle}}</h1><hr> 
+            <h3>Author: {{postData.User.Username}}</h3><br>
+            <h4>Date: {{postData.CreationDate}}</h4><br>
+            <h6>Type: {{postData.Type.Type}}</h6><hr>
+            <div class="container">
+                {{postData.PostContent}}
+            </div>
         </div>
     </div>
     <!--if post doesn't exist it shows this-->
