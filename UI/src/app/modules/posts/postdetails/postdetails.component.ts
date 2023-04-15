@@ -15,6 +15,7 @@ import { DeletepostComponent } from '../deletepost/deletepost.component';
 export class PostdetailsComponent {
   loaded: Promise<boolean> = Promise.resolve(false);
   postId: any;
+  typeId: any;
   userId: any = this.logindata.userId;
   postData: any = [];
   postsList: IPost[] = []
@@ -67,6 +68,7 @@ export class PostdetailsComponent {
   getPost(id:any){
     this.service.getPost(id).subscribe(data=>{
       this.postData = data;
+      this.typeId = this.postData.Type.TypeId
       this.loaded = Promise.resolve(true);
     })
   }
