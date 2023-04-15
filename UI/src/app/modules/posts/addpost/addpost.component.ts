@@ -52,6 +52,7 @@ export class AddpostComponent implements OnInit{
   }
   //adding post, validating it's data, if everything is correct, it waits some time, so the data could reload without any problems
   addPost(){
+    this.err=false;
     var val={Type: this.type,
             User: this.logindata.userId,
             PostTitle: this.postTitle,
@@ -70,6 +71,7 @@ export class AddpostComponent implements OnInit{
   }
   //editing post, validating it's data, if everything is correct, it waits some time, so the data could reload without any problems
   editPost(){
+    this.err=false;
     var val={PostId: this.postId,
             Type: this.type,
             User: this.logindata.userId,

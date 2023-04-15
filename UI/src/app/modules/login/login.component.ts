@@ -42,6 +42,7 @@ export class LoginComponent{
   //data is check via sending post to api, and returning logged or err, then if data is correct, id is taken from api
   signIn(){
     this.acc_created = false;
+    this.err=false;
     var val = {Username: this.username,
               Password: this.password}
     var logged = this.validation.validateUser(val, true);
@@ -66,6 +67,7 @@ export class LoginComponent{
   }
   //sign up method, validating data from form, and if everything is correct, adding user and changing to sign in form
   signUp(){
+    this.err=false;
     var val = { Username: this.username,
                 Password: this.password}
     var signup_val = this.validation.validateUser(val, false);

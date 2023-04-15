@@ -1,13 +1,17 @@
-  <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('dismiss')"></button>
-  </div>
-  <div class="modal-body">
-    <div class="form-fruop row">
-      <div class="alert alert-danger">Are you sure?</div>
+  <div class="card text-bg-dark">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('dismiss')"></button>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('close')">No</button>
-    <button type="button" class="btn btn-primary" [ngClass]="{'disabled' : done}" (click)="deletePost()">Yes</button>
+    <div class="modal-body">
+      <div class="form-fruop row">
+        <div class="alert alert-danger">Are you sure?</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="mx-auto">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" style="margin-right: 10px" (click)="closeModal('close')">No</button>
+        <button type="button" class="btn btn-danger" [ngClass]="{'disabled' : done}" (click)="deletePost()">Yes</button>
+      </div>
+    </div>
   </div>

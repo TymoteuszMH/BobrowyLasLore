@@ -1,21 +1,21 @@
-<div class="modal-xlg">
-  <div class = "mdl">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="exampleModalLabel">{{modalTitle}}</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('dismiss')"></button>
+<div class="card text-bg-dark modal-xlg">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">{{modalTitle}}</h1>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('dismiss')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-fruop row">
+      <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
+      <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="postTitle" class="form-control bg-dark text-white"/>
+      <label class="col-form-label">Photo:</label><input type="file" (change)="uploadPhoto($event)" class="form-control bg-dark text-white"/>
+      <label class="col-form-label">Content:</label><textarea [(ngModel)]="postContent" class="form-control bg-dark text-white" style="width: 600px; height: 400px;"></textarea>
     </div>
-    <div class="modal-body">
-      <div class="form-fruop row">
-        <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
-        <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="postTitle" class="form-control"/>
-        <label class="col-form-label">Photo:</label><input type="file" (change)="uploadPhoto($event)" class="form-control"/>
-        <label class="col-form-label">Content:</label><textarea [(ngModel)]="postContent" class="form-control" style="width: 600px; height: 400px;"></textarea>
-      </div>
-    </div>
-    <div class="modal-footer">
+  </div>
+  <div class="modal-footer">
+    <div class="mx-auto">
+      <button type="button" *ngIf="!edit" [ngClass]="{'disabled' : done}" class="btn btn-warning" style="margin-right: 10px" (click)="addPost()">Save changes</button>
+      <button type="button" *ngIf="edit" [ngClass]="{'disabled' : done}" class="btn btn-warning" (click)="editPost()">Save changes</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('close')">Close</button>
-      <button type="button" *ngIf="!edit" [ngClass]="{'disabled' : done}" class="btn btn-primary" (click)="addPost()">Save changes</button>
-      <button type="button" *ngIf="edit" [ngClass]="{'disabled' : done}" class="btn btn-primary" (click)="editPost()">Save changes</button>
     </div>
   </div>
 </div>

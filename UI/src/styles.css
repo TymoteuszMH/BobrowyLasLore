@@ -7,6 +7,9 @@ body{
     background-size: cover;
     background-position: center; 
 }
+.bi{
+    color: white;
+}
 .text{
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
@@ -30,6 +33,14 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.mdl{
+.search{
+    margin-top: 10px;
+}
+.form-control:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.2rem rgba(	255, 193, 7, .25);
+} 
+.dropdown-item:focus{
     color: black;
+    background-color: #ffc107;
 }

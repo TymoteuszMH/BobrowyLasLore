@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="card mx-auto" style="max-width: 18rem;">
-        <div class="card-body mx-auto mdl">
+<div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="card mx-auto text-bg-dark" style="max-width: 18rem;">
+        <div class="card-body mx-auto log">
             <div class="card-title">
                 <h1>Welcome!</h1>
             </div>
@@ -9,12 +9,12 @@
                 <div class="alert alert-success" *ngIf="acc_created">Account created successfully!</div>
                 <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
                 <!--orm fields-->
-                <label class="col-form-label">Username:</label><input type="text" [(ngModel)]="username" class="form-control"/>
-                <label class="col-form-label">Password:</label><input type="password" [(ngModel)]="password" class="form-control"/>
+                <label class="col-form-label">Username:</label><input type="text" [(ngModel)]="username" class="form-control bg-dark text-white"/>
+                <label class="col-form-label">Password:</label><input type="password" [(ngModel)]="password" class="form-control bg-dark text-white"/>
                 <!--here are buttons for changing form-->
-                <a (click)="changeForm()" class="btn-link">{{form}}</a>
-                <button (click)="signUp()" *ngIf="signup" class="btn btn-primary">Sign up</button>
-                <button (click)="signIn()" *ngIf="!signup" class="btn btn-primary">Sign in</button>
+                <a (click)="changeForm()" class="link-warning">{{form}}</a>
+                <button (click)="signUp()" *ngIf="signup" class="btn btn-warning">Sign up</button>
+                <button (click)="signIn()" *ngIf="!signup" class="btn btn-warning">Sign in</button>
             </div>
         </div>
     </div>
