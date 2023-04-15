@@ -48,7 +48,7 @@ export class PostdetailsComponent {
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.modalTitle = this.modalTitle;
     modalRef.componentInstance.posts = this.postsList;
-    modalRef.componentInstance.type = 2;
+    modalRef.componentInstance.type = this.typeId;
     modalRef.componentInstance.edit = true;
     
     modalRef.result.then(()=>{this.getPost(data.PostId);});
