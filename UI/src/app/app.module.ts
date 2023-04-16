@@ -20,6 +20,7 @@ import { ValidationService } from './modules/helpers/validation.service';
 import { CheckService } from './modules/helpers/check.service';
 import { SheredService, LoginData } from './modules/helpers/shered.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    EditorModule,
   ],
   providers: [SheredService, LoginData, ValidationService, CheckService],
   bootstrap: [AppComponent]

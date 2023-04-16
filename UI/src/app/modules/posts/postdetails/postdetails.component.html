@@ -3,8 +3,8 @@
     <div class="container" *ngIf="postData != 'error'">
         <!--buttons are shown if user is author-->
         <div *ngIf="postData.User.UserId==userId">
-            <button class="btn btn-primary" (click)="openAddModal(postData)">Edit</button>
-            <button (click)="deletePost(postData.PostId)" class="btn btn-primary" data-bs-toggle="modal">Delete Articule</button>
+            <button class="add btn btn-warning" style="margin-right: 10px" (click)="openAddModal(postData)">Edit</button>
+            <button (click)="deletePost(postData.PostId)" class="add btn btn-warning" data-bs-toggle="modal">Delete Articule</button>
         </div>
         <div class = "text">
             <img [src]=postData.PostPhoto width="200px" height="220px"/>
@@ -12,8 +12,8 @@
             <h3>Author: {{postData.User.Username}}</h3><br>
             <h4>Date: {{postData.CreationDate}}</h4><br>
             <h6>Type: {{postData.Type.Type}}</h6><hr>
-            <div class="container">
-                {{postData.PostContent}}
+            <div class="container" [innerHTML]="postData.PostContent">
+                
             </div>
         </div>
     </div>

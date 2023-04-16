@@ -6,15 +6,34 @@
   <div class="modal-body">
     <div class="form-fruop row">
       <div class="alert alert-danger" *ngIf="err">{{validation.err_mes}}</div>
-      <label class="col-form-label">Title:</label><input type="text" [(ngModel)]="postTitle" class="form-control bg-dark text-white"/>
-      <label class="col-form-label">Photo:</label><input type="file" (change)="uploadPhoto($event)" class="form-control bg-dark text-white"/>
-      <label class="col-form-label">Content:</label><textarea [(ngModel)]="postContent" class="form-control bg-dark text-white" style="width: 600px; height: 400px;"></textarea>
+      <label class="col-form-label">Title:</label>
+        <input type="text" [(ngModel)]="postTitle" class="form-control bg-dark text-white"/>
+      <label class="col-form-label">Photo:</label>
+        <input type="file" (change)="uploadPhoto($event)" class="form-control bg-dark text-white"/>
+      <label class="col-form-label">Content:</label>
+        <editor [(ngModel)]="postContent" 
+          [apiKey]="'dfndy4k3qsfwnmo05e9zts9cx2qu9sgm7obw4sztau07aui1'"
+          [init]="{
+            selector: 'textarea',
+            height: 500,
+            menubar: false,
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar:
+              'undo redo | formatselect | bold italic backcolor | \
+              alignleft aligncenter alignright alignjustify | \
+              bullist numlist outdent indent | removeformat | help'
+          }">
+        </editor>
     </div>
   </div>
   <div class="modal-footer">
     <div class="mx-auto">
       <button type="button" *ngIf="!edit" [ngClass]="{'disabled' : done}" class="btn btn-warning" style="margin-right: 10px" (click)="addPost()">Save changes</button>
-      <button type="button" *ngIf="edit" [ngClass]="{'disabled' : done}" class="btn btn-warning" (click)="editPost()">Save changes</button>
+      <button type="button" *ngIf="edit" [ngClass]="{'disabled' : done}" class="btn btn-warning" style="margin-right: 10px" (click)="editPost()">Save changes</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('close')">Close</button>
     </div>
   </div>
