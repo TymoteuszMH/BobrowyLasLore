@@ -21,6 +21,7 @@ export class NavbarComponent{
     localStorage.setItem('userid','0');
     localStorage.setItem('username','');
     this.changeroute.change(false);
+    this.logindata.Check();
   }
 
 }

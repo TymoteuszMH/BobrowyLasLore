@@ -61,8 +61,14 @@ export class SheredService {
 
 //place to store data of logged user
 export class LoginData{
-  public logged:any = localStorage.getItem('logged');
-  public userId:any = localStorage.getItem('userid');
-  public userName: any = localStorage.getItem('username');
-  public password: any = localStorage.getItem('password');
+  logged:any;
+  userId:any;
+  userName: any;
+  password: any;
+  Check(){
+    this.logged = localStorage.getItem('logged');
+    this.userId = localStorage.getItem('userid');
+    this.userName = localStorage.getItem('username');
+    this.password = localStorage.getItem('password');
+  }
 }
