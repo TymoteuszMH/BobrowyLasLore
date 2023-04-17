@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ValidationService } from '../helpers/validation.service';
-import { LoginData, SheredService } from '../helpers/shered.service';
+import { SheredService } from '../helpers/shered.service';
 import { ChangerouteService } from '../helpers/changeroute.service';
 
 @Component({
@@ -19,7 +19,6 @@ export class LoginComponent{
   res: any;
 
   constructor(
-    private logindata: LoginData,
     private service: SheredService,
     protected validation: ValidationService,
     private changeroute: ChangerouteService
@@ -58,7 +57,6 @@ export class LoginComponent{
           })
           localStorage.setItem('logged', '1');
           this.changeroute.change(true)
-          this.logindata.Check();
         }else{
           this.err=true;
         }
