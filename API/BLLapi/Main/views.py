@@ -41,11 +41,12 @@ def usersApi(request, username=""):
         return JsonResponse("err", safe=False)
     elif request.method=='PUT':
         user_data = JSONParser().parse(request)
-        user = Users.objects.get(UserId = user_data['UserId'])
-        user_serializer = UsersSerializer(user, data=user_data)
-        if user_serializer.is_valid():
-            user_serializer.save()
-            return JsonResponse("added", safe=False)
+        if username == user_data['Username']:
+            user = Users.objects.get(UserId = user_data['UserId'])
+            user_serializer = UsersSerializer(user, data=user_data)
+            if user_serializer.is_valid():
+                user_serializer.save()
+                return JsonResponse("added", safe=False)
         return JsonResponse("err", safe=False)
 #types doesn't need any api
 #there is 1st post api for getting things by type and adding or editing post

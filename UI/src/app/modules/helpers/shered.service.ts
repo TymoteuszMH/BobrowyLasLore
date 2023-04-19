@@ -25,8 +25,8 @@ export class SheredService {
     return this.http.post(this.APIUrl + '/users/', val)
   }
 
-  updateUser(val:any){
-    return this.http.put(this.APIUrl + '/users/', val)
+  updateUser(val:any, login:string){
+    return this.http.put(this.APIUrl + '/users/' + login, val)
   }
 
   getPosts():Observable<any[]>{

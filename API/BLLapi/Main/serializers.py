@@ -6,13 +6,18 @@ class UsersSerializer(serializers.ModelSerializer):
         model = Users
         fields = ['UserId','Username', 'Password']
 
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ['UserId','Username']
+
 class TypesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Types
         fields = ['TypeId','Type']
 #1st post serializer is for getting foreign keys and all data 
 class PostsSerializer(serializers.ModelSerializer):
-    User = UsersSerializer(many=False)
+    User = AuthorSerializer(many=False)
     Type = TypesSerializer(many=False)
     class Meta:
         model = Posts

@@ -28,7 +28,7 @@ export class UserComponent{
                 Password: this.password}
     var validate = this.validation.validateUser(val, false);
     if(validate){
-      this.service.updateUser(val).subscribe(res=>{
+      this.service.updateUser(val, this.loginData.userId).subscribe(res=>{
         if(res == "added"){
           localStorage.setItem('username', val.Username);
           localStorage.setItem('password', val.Password);
