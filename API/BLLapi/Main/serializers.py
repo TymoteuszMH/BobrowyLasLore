@@ -5,7 +5,7 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ['UserId','Username', 'Password']
-
+#Author Serializer is for getting only username and id for author of post
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
