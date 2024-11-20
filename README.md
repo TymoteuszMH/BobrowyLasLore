@@ -8,6 +8,4 @@ Post module with 3 functions: showing posts list depending on it's type, showing
 
 You can activate local servers with batch files located in .bat forlder.
 
-You can visit site on: https://bll-ui.vercel.app/
-
 !rundjango.bat is downloading needed venv packages, but you still need to download node.js and angular on your own!
